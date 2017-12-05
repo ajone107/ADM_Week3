@@ -1,0 +1,46 @@
+---
+title: "Jones_HW2_Codev2"
+output:
+  pdf_document: default
+  html_document: default
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(cluster)
+library(clusterSim)
+library(fpc)
+library(dummies)
+library(cluster)
+library(fpc)
+library(klaR)
+library(clustMixType)
+library(tidyverse)
+```
+
+```{r Load CSV}
+crash <- read.csv("E:/Onedrive/Training and Education/Masters/Applied Data Mining - 8/HW3/GITHUB/ADM_Week3/data/crashv2.csv")
+crash$Region <- as.factor(crash$Region)
+crash$Atmospheric.Conditions <- as.factor(crash$Atmospheric.Conditions)
+crash$Roadway <- as.factor(crash$Roadway)
+crash$Roadway.Area <- as.factor(crash$Roadway.Area)
+crash$Roadway.Type <- as.factor(crash$Roadway.Type)
+crash$Road.Type...Category <- as.factor(crash$Road.Type...Category)
+crash$Driver.Over.Federal.Limit. <- as.factor(crash$Driver.Over.Federal.Limit.)
+crash$Person.Type <- as.factor(crash$Person.Type)
+crash$Drug.Involvement <- as.factor(crash$Drug.Involvement)
+crash$Race <- as.factor(crash$Race)
+crash$Gender <- as.factor(crash$Gender)
+crash$Injury.Severity <- as.factor(crash$Injury.Severity)
+
+
+```
+
+
+```{r Perform kproto}
+#perform kproto
+set.seed(123)
+
+crash.kprototype <- kproto(crash, k=2) #you should try setting nstart > 1. 
+
+summary(crash.kprototype)
+```

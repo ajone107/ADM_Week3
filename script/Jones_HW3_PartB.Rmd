@@ -1,0 +1,54 @@
+---
+title: "Jones_HW3_Code"
+output:
+  pdf_document: default
+  html_document: default
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(cluster)
+library(clusterSim)
+library(fpc)
+library(dummies)
+library(cluster)
+library(fpc)
+library(klaR)
+library(clustMixType)
+library(tidyverse)
+library(pls)
+library(glmnet)
+library(ggplot2)
+library(ggrepel)
+```
+
+```{r Load CSV}
+universities <- read.csv("E:/Onedrive/Training and Education/Masters/Applied Data Mining - 8/HW3/GITHUB/ADM_Week3/data/Universitiesv2.csv")
+set.seed(123)
+#crash$Region <- as.factor(crash$Region)
+
+#https://en.wikibooks.org/wiki/Data_Mining_Algorithms_In_R/Dimensionality_Reduction/Principal_Component_Analysis
+
+#https://ocw.mit.edu/courses/sloan-school-of-management/15-062-data-mining-spring-2003/lecture-notes/PClecture.pdf
+
+summary(universities)
+
+```
+
+```{r use prcomp on all variables}
+pcs<-prcomp(universities)
+summary(pcs)
+```
+
+```{r normalize the dataset}
+pcs<-prcomp(universities, scale. = T) #use scale option to z-normalize data set. 
+summary(pcs)
+```
+
+```{r bar chart the variance}
+pcs.variance.explained <-(pcs$sdev^2 / sum(pcs$sdev^2))*100
+barplot(pcs.variance.explained, las=2, xlab="Principal Component", ylab="% Variance Explained", main="Principal Components versus Percent of Variance Explained")
+```
+
+```{r Review Principal Components}
+pcs$rotation
+```
